@@ -19,6 +19,7 @@ jobs:
         with:
           python-version: "3.14"
           enable-cache: true
+          cache-suffix: lint
       - run: uv sync --locked
       - run: uv run --no-sync ruff check .
       - run: uv run --no-sync ruff format --check .
@@ -43,6 +44,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
+          cache-suffix: test
       - run: uv sync --locked
       - run: uv run --no-sync pytest -q
       - run: uv build
