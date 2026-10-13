@@ -22,12 +22,26 @@ jobs:
             echo "::error::Tag $GITHUB_REF_NAME does not match project version $version"
             exit 1
           fi
+      - name: Extract release notes from CHANGELOG.md
+        run: |
+          version=${GITHUB_REF_NAME#v}
+          awk -v v="$version" 'index($0, "## [" v "]") == 1 {f=1; next}
+            f && (/^## \[/ || /^\[.*\]: /) {exit} f' CHANGELOG.md > release-notes.md
+          if ! grep -q '[^[:space:]]' release-notes.md; then
+            echo "::error::CHANGELOG.md has no entry for $version"
+            exit 1
+          fi
       - run: uv run --locked pytest -q
       - run: uv build
       - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-notes
+          path: release-notes.md
           if-no-files-found: error
 
   publish:
@@ -44,3 +58,26 @@ jobs:
           name: dist
           path: dist/
       - uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-notes
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "$GITHUB_REF_NAME" dist/*
+          --repo "$GITHUB_REPOSITORY"
+          --title "$GITHUB_REF_NAME"
+          --notes-file release-notes.md
+          --verify-tag
