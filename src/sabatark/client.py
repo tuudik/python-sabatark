@@ -131,6 +131,7 @@ class AgatarkClient:
         remember: bool = True,
         session_state: SessionState | None = None,
         on_session_change: Callable[[SessionState | None], Awaitable[None] | None] | None = None,
+        on_connection_change: Callable[[bool], Awaitable[None] | None] | None = None,
     ) -> None:
         self.base_url = base_url.rstrip("/")
         self.guard = guard
@@ -139,6 +140,8 @@ class AgatarkClient:
         self._token = token
         self._remember = remember
         self._on_session_change = on_session_change
+        self._on_connection_change = on_connection_change
+        self._connected: bool | None = None
         self._session = session
         self._owns_session = session is None
         self._timeout = aiohttp.ClientTimeout(total=timeout)
@@ -193,6 +196,11 @@ class AgatarkClient:
     @property
     def session_state(self) -> SessionState | None:
         return self._state
+
+    @property
+    def connected(self) -> bool | None:
+        """None before the first request completes, then whether the controller last answered."""
+        return self._connected
 
     async def login(self) -> Hello:
         """PUT /hello with the derived token; stores the reply's authorization."""
@@ -395,6 +403,20 @@ class AgatarkClient:
         except Exception as exc:
             _LOGGER.warning("Session change callback failed (%s)", type(exc).__name__)
 
+    async def _set_connected(self, connected: bool) -> None:
+        previous = self._connected
+        self._connected = connected
+        if previous is connected or (previous is None and connected):
+            return
+        if self._on_connection_change is None:
+            return
+        try:
+            result = self._on_connection_change(connected)
+            if inspect.isawaitable(result):
+                await result
+        except Exception as exc:
+            _LOGGER.warning("Connection change callback failed (%s)", type(exc).__name__)
+
     async def _send(
         self,
         method: str,
@@ -414,25 +436,31 @@ class AgatarkClient:
             headers["Content-Type"] = "application/json"
             payload = json.dumps(body, separators=(",", ":")).encode()
         _LOGGER.debug("%s %s", method, path)
-        async with self._http().request(
-            method,
-            URL(self.base_url + path, encoded=True),
-            headers=headers,
-            data=payload,
-            skip_auto_headers=() if payload is not None else ("Content-Type",),
-            timeout=client_timeout or self._timeout,
-        ) as response:
-            raw = await response.read()
-            data: Any = None
-            if response.content_type == "application/json" and raw:
-                try:
-                    data = json.loads(raw)
-                except ValueError:
+        try:
+            async with self._http().request(
+                method,
+                URL(self.base_url + path, encoded=True),
+                headers=headers,
+                data=payload,
+                skip_auto_headers=() if payload is not None else ("Content-Type",),
+                timeout=client_timeout or self._timeout,
+            ) as response:
+                raw = await response.read()
+                data: Any = None
+                if response.content_type == "application/json" and raw:
+                    try:
+                        data = json.loads(raw)
+                    except ValueError:
+                        data = raw.decode(errors="replace")
+                elif raw:
                     data = raw.decode(errors="replace")
-            elif raw:
-                data = raw.decode(errors="replace")
-            match = _LINK_NEXT.search(response.headers.get("Link", ""))
-            return _Reply(response.status, data, match.group(1) if match else None)
+                match = _LINK_NEXT.search(response.headers.get("Link", ""))
+                reply = _Reply(response.status, data, match.group(1) if match else None)
+        except (aiohttp.ClientError, TimeoutError):
+            await self._set_connected(False)
+            raise
+        await self._set_connected(reply.status < 500)
+        return reply
 
     async def _login(self) -> Hello:
         if not self._email:

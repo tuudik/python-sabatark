@@ -83,6 +83,9 @@ class FakeController:
                 request.transport.close()
                 await asyncio.sleep(0)
                 return web.Response(status=599)
+            if responder is STALL:
+                await asyncio.sleep(STALL_SECONDS)
+                return web.Response(status=599)
             while not isinstance(responder, web.StreamResponse):
                 responder = responder(seen)
             return responder
@@ -121,6 +124,13 @@ class FakeController:
 
 def DISCONNECT(seen: Seen) -> web.Response:
     raise AssertionError("DISCONNECT is a marker, not a responder")
+
+
+STALL_SECONDS = 0.3
+
+
+def STALL(seen: Seen) -> web.Response:
+    raise AssertionError("STALL is a marker, not a responder")
 
 
 @asynccontextmanager

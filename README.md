@@ -65,6 +65,14 @@ Errors derive from `AgatarkError`. `AuthError` covers rejected logins, `Password
 is HTTP 454, `UplinkError` is HTTP 504 and `ConfirmationRequired` is HTTP 406: retry the same
 call with `confirm=exc.action` once the user has agreed.
 
+`client.connected` tells whether the controller answered the last request: `None` before the
+first request completes, `False` after a network error, timeout or HTTP 5xx (including the
+`504` that still raises `UplinkError`), and `True` once a request or event poll gets any other
+reply. Pass `on_connection_change=` (a plain or async callable taking a `bool`) to hear about
+each change; it fires once per transition, not for the first successful request. `events()`
+keeps retrying through outages, so this is how a consumer notices that the controller is
+unreachable.
+
 ### Write guard
 
 Writes are unrestricted by default. Pass a `WriteGuard` to allow only specific targets; any
