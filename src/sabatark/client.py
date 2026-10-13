@@ -179,7 +179,7 @@ class AgatarkClient:
         if logout and self._authorization is not None:
             try:
                 await self.logout()
-            except (AgatarkError, aiohttp.ClientError, TimeoutError):
+            except AgatarkError, aiohttp.ClientError, TimeoutError:
                 _LOGGER.debug("Logout during close failed", exc_info=True)
         if self._owns_session and self._session is not None:
             await self._session.close()
@@ -456,7 +456,7 @@ class AgatarkClient:
                     data = raw.decode(errors="replace")
                 match = _LINK_NEXT.search(response.headers.get("Link", ""))
                 reply = _Reply(response.status, data, match.group(1) if match else None)
-        except (aiohttp.ClientError, TimeoutError):
+        except aiohttp.ClientError, TimeoutError:
             await self._set_connected(False)
             raise
         await self._set_connected(reply.status < 500)

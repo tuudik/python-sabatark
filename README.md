@@ -5,7 +5,7 @@ controllers. It talks to the controller's HTTP API with [aiohttp](https://docs.a
 and covers login and session reuse, devices, sites and rooms, the generic collections, the
 live `/events` stream and the change log. A small `sabatark` command-line tool is included.
 
-The package is typed (`py.typed`) and needs Python 3.13 or newer.
+The package is typed (`py.typed`) and needs Python 3.14 or newer.
 
 ## Install
 

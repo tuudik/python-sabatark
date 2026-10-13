@@ -25,5 +25,6 @@ All notable changes to this project are documented here. The format follows
   roles.
 - `sabatark` command-line tool: `outputs`, `inputs`, `sensors`, `status`, `watch`, `logs`,
   `dump`, `set` (guarded with `--allow-device`) and `logout`.
+- Requires Python 3.14 or newer, matching current Home Assistant.
 
 [0.1.0]: https://github.com/tuudik/python-sabatark/releases/tag/v0.1.0

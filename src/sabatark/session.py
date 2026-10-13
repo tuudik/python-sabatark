@@ -87,7 +87,7 @@ def load_session(path: Path) -> SessionState | None:
     """Read a session file; None when it is missing, unreadable or invalid."""
     try:
         return SessionState.from_dict(json.loads(path.read_text(encoding="utf-8")))
-    except (OSError, ValueError):
+    except OSError, ValueError:
         return None
 
 

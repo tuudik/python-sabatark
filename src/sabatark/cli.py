@@ -298,7 +298,7 @@ def main(argv: list[str] | None = None) -> None:
         asyncio.run(run(args))
     except WriteBlocked as exc:
         arguments.exit(3, f"sabatark: {exc}\n")
-    except (AgatarkError, ClientError, TimeoutError, OSError, ValueError, NotImplementedError):
+    except AgatarkError, ClientError, TimeoutError, OSError, ValueError, NotImplementedError:
         arguments.exit(
             2, "sabatark: Command failed; check configuration and controller availability\n"
         )

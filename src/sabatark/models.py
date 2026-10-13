@@ -52,7 +52,7 @@ class Hello:
         return bool(self.user)
 
     @classmethod
-    def from_dict(cls, data: Mapping[str, Any]) -> "Hello":
+    def from_dict(cls, data: Mapping[str, Any]) -> Hello:
         user = data.get("user")
         return cls(
             authorization=data.get("authorization") or None,
@@ -83,7 +83,7 @@ class Device:
     raw: dict[str, Any] = field(default_factory=dict, repr=False)
 
     @classmethod
-    def from_dict(cls, data: Mapping[str, Any]) -> "Device":
+    def from_dict(cls, data: Mapping[str, Any]) -> Device:
         usage = {
             str(key): [str(item) for item in value] if isinstance(value, list) else []
             for key, value in _dict(data.get("usage")).items()
@@ -105,7 +105,7 @@ class Device:
             raw=dict(data),
         )
 
-    def apply(self, event: "EventDelta") -> "Device":
+    def apply(self, event: EventDelta) -> Device:
         """Return a copy with an event delta merged in."""
         if event.id != self.id:
             raise ValueError(f"Event for item {event.id} applied to device {self.id}")
@@ -135,7 +135,7 @@ class Site:
     raw: dict[str, Any] = field(default_factory=dict, repr=False)
 
     @classmethod
-    def from_dict(cls, data: Mapping[str, Any]) -> "Site":
+    def from_dict(cls, data: Mapping[str, Any]) -> Site:
         return cls(id=int(data["id"]), name=str(data.get("name") or ""), raw=dict(data))
 
 
@@ -149,7 +149,7 @@ class Room:
     raw: dict[str, Any] = field(default_factory=dict, repr=False)
 
     @classmethod
-    def from_dict(cls, data: Mapping[str, Any]) -> "Room":
+    def from_dict(cls, data: Mapping[str, Any]) -> Room:
         return cls(
             id=int(data["id"]),
             name=str(data.get("name") or ""),
@@ -259,7 +259,7 @@ class LogEntry:
         return datetime.fromtimestamp(self.time / 1000, UTC)
 
     @classmethod
-    def from_dict(cls, data: Mapping[str, Any]) -> "LogEntry":
+    def from_dict(cls, data: Mapping[str, Any]) -> LogEntry:
         return cls(
             id=_int(data.get("id")),
             time=_int(data.get("time")) or 0,
