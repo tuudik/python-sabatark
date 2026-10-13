@@ -11,10 +11,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+      - uses: actions/checkout@v7
         with:
-          python-version: "3.13"
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          python-version: "3.14"
+          enable-cache: false
       - name: Check that the tag matches the project version
         run: |
           version=$(uv version --short)
@@ -31,14 +34,15 @@ jobs:
             echo "::error::CHANGELOG.md has no entry for $version"
             exit 1
           fi
-      - run: uv run --locked pytest -q
+      - run: uv sync --locked
+      - run: uv run --no-sync pytest -q
       - run: uv build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist/
           if-no-files-found: error
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: release-notes
           path: release-notes.md
@@ -53,7 +57,7 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist/
@@ -65,11 +69,11 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist/
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: release-notes
       - name: Create the GitHub release

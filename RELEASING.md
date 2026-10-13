@@ -16,8 +16,8 @@ only when a tag matching `v*` is pushed.
 1. Bump the version with `uv version X.Y.Z`, which updates `pyproject.toml` and `uv.lock`.
 2. In `CHANGELOG.md`, add a `## [X.Y.Z] - YYYY-MM-DD` section with the changes and a
    `[X.Y.Z]: https://github.com/tuudik/python-sabatark/releases/tag/vX.Y.Z` link at the bottom.
-3. Check locally: `uv run pytest -q`, `uv run ruff check .`, `uv run ruff format --check .` and
-   `uv build`.
+3. Check locally on Python 3.14 (the version in `.python-version`): `uv run pytest -q`,
+   `uv run ruff check .`, `uv run ruff format --check .` and `uv build`.
 4. Commit, then tag and push:
 
    ```sh
@@ -29,7 +29,7 @@ only when a tag matching `v*` is pushed.
 5. The workflow then:
    - fails unless the tag equals `v` plus the project version and `CHANGELOG.md` has a section
      for that version;
-   - runs the tests and builds the sdist and wheel;
+   - runs the tests on Python 3.14 and builds the sdist and wheel;
    - publishes both to PyPI through trusted publishing (environment `pypi`);
    - after a successful upload, creates a GitHub release for the tag with the sdist and wheel
      attached and that version's `CHANGELOG.md` section as its notes.
@@ -37,6 +37,11 @@ only when a tag matching `v*` is pushed.
 If the build or tests fail, nothing is published: fix the problem, delete the tag
 (`git push --delete origin vX.Y.Z` and `git tag -d vX.Y.Z`) and tag again. PyPI never accepts
 the same version twice, so once the upload has succeeded, ship any fix as a new version.
+
+## Dependency updates
+
+Dependabot (`.github/dependabot.yml`) opens weekly pull requests for GitHub Actions and for the
+`uv.lock` dependencies, with minor and patch updates grouped into one pull request.
 
 ## After the release
 
