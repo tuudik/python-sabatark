@@ -1,0 +1,40 @@
+{
+ "a": "tab0",
+ "nodeName": "controller",
+ "style": "default",
+ "user": {
+  "id": 50,
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "enabled": true,
+  "name": "Test User",
+  "remarks": "",
+  "email": "user@example.com",
+  "lang": "en",
+  "number": "",
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "uuid": "usr0test",
+  "status": {
+   "dot": "green"
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ },
+ "version": "1.0.0-test"
+}

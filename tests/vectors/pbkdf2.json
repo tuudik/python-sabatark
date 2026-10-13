@@ -1,0 +1,105 @@
+{
+ "source": "EnLife web UI crypto.pbkdf2(password, email.toLowerCase().trim(), 1e4, 32, 'sha256'), run in the browser 2026-10-13",
+ "vectors": [
+  {
+   "password": "password",
+   "email": "user@example.com",
+   "salt": "user@example.com",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "7a2fd50cc006384e8c694c4a83e04233dca11a13cae0378fd7f7f77035675161",
+   "stdlib_matches": true
+  },
+  {
+   "password": "Correct Horse Battery Staple",
+   "email": "Test.User@Example.COM ",
+   "salt": "test.user@example.com",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "08116650abcb906055579f3698daa75e2930b381cefa685869cee1738559827f",
+   "stdlib_matches": true
+  },
+  {
+   "password": "",
+   "email": "empty@example.com",
+   "salt": "empty@example.com",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "62d66ebe54b9bafcbb76334b96eca63329892ef4fc0bc16304fa3470c6a5e3ef",
+   "stdlib_matches": true
+  },
+  {
+   "password": "a",
+   "email": "a@b.c",
+   "salt": "a@b.c",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "88003f08e9801d3a0ae48d76b8aaea98938430cb999d95f152dcf849c3820f62",
+   "stdlib_matches": true
+  },
+  {
+   "password": "õäöüšž ÕÄÖÜŠŽ",
+   "email": "täht@näide.ee",
+   "salt": "täht@näide.ee",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "2b99ba123dd571eb80344cd76a8a1d3c66c6c25cb2c5e8698957dfb0a03041c8",
+   "stdlib_matches": true
+  },
+  {
+   "password": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "email": "len64@example.com",
+   "salt": "len64@example.com",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "543f04faabf1054b0d1f61e2428ac932c379b6d665d05122f1101955ea752bbc",
+   "stdlib_matches": true
+  },
+  {
+   "password": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "email": "len65@example.com",
+   "salt": "len65@example.com",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "d986a33009b721039338fd59228993e8af05fa8479b0624eb42a904b6b01dce7",
+   "stdlib_matches": true
+  },
+  {
+   "password": "ääääääääääääääääääääääääääääääääääääääää",
+   "email": "nonascii-80bytes-40chars@example.com",
+   "salt": "nonascii-80bytes-40chars@example.com",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "4fa120320c16ff6ee5e606b025918fc443c00a5f4e14eb01d9576fb695cbb3ad",
+   "stdlib_matches": false
+  },
+  {
+   "password": "ääääääääääääääääääääääääääääääääääääääääääääääääääääääääääääääää",
+   "email": "nonascii-128bytes-64chars@example.com",
+   "salt": "nonascii-128bytes-64chars@example.com",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "bbb5cdde96add01a098dbb51fcb89f9504dcc1bc4524a9628ec732840157f2e2",
+   "stdlib_matches": false
+  },
+  {
+   "password": "ääääääääääääääääääääääääääääääääääääääääääääääääääääääääääääääääääääää",
+   "email": "nonascii-140bytes-70chars@example.com",
+   "salt": "nonascii-140bytes-70chars@example.com",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "7147ab6acbec161dd04ace4333098b85da514755aea1c6191f6b0333d49ff071",
+   "stdlib_matches": true
+  },
+  {
+   "password": "🔒emoji🔑",
+   "email": "emoji@example.com",
+   "salt": "emoji@example.com",
+   "iterations": 10000,
+   "dklen": 32,
+   "token": "800f5bca13db174ea54874cae5ee92c579007c6a079321d3bca4c608f4435584",
+   "stdlib_matches": true
+  }
+ ],
+ "rule": "HMAC key = sha256(utf8(password)) if JS length (UTF-16 code units) > 64, else utf8(password)[:64]; then standard PBKDF2-HMAC-SHA256, salt = email.lower().strip(), 10000 iterations, 32 bytes, hex. Differs from hashlib.pbkdf2_hmac only when utf8 > 64 bytes and length <= 64 (stdlib_matches=false)."
+}

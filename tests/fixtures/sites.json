@@ -1,0 +1,36 @@
+[
+ {
+  "id": 7,
+  "name": "Test Home",
+  "enabled": true,
+  "type": "home",
+  "uuid": "site0001",
+  "lang": "en",
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "status": {
+   "online": true
+  },
+  "setup": {},
+  "usage": {},
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ }
+]

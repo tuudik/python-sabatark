@@ -1,0 +1,617 @@
+[
+ {
+  "id": 1001,
+  "name": "Kitchen light",
+  "type": "output",
+  "enabled": true,
+  "roomId": 70,
+  "siteId": 7,
+  "uuid": "kq7tz2ma",
+  "usage": {
+   "light": [
+    ""
+   ]
+  },
+  "status": {
+   "output": true,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  },
+  "conf": [
+   {
+    "id": 1,
+    "path": "/status/o1",
+    "target": "/status/output",
+    "pollTime": 0,
+    "mode": "",
+    "relay": ""
+   }
+  ],
+  "setup": {
+   "onTime": "2026-01-01T08:00:00.000Z"
+  }
+ },
+ {
+  "id": 1002,
+  "name": "Hall light",
+  "type": "light",
+  "enabled": true,
+  "roomId": 71,
+  "siteId": 7,
+  "uuid": "dev01002",
+  "usage": {
+   "light": [
+    ""
+   ]
+  },
+  "status": {
+   "output": false,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  },
+  "conf": [
+   {
+    "id": 1,
+    "path": "/status/o2",
+    "target": "/status/output",
+    "pollTime": 0,
+    "mode": ""
+   }
+  ]
+ },
+ {
+  "id": 1003,
+  "name": "Bedroom dimmer",
+  "type": "outputPwm",
+  "enabled": true,
+  "roomId": 73,
+  "siteId": 7,
+  "uuid": "dev01003",
+  "usage": {},
+  "status": {
+   "output": true,
+   "level": 40,
+   "fadeTime": 250,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  },
+  "conf": [
+   {
+    "id": 1,
+    "path": "/status/pwm1",
+    "target": "/status/output",
+    "pollTime": 0,
+    "mode": ""
+   }
+  ]
+ },
+ {
+  "id": 1004,
+  "name": "Garden light",
+  "type": "",
+  "enabled": true,
+  "roomId": 72,
+  "siteId": 7,
+  "uuid": "dev01004",
+  "usage": {
+   "light": [
+    ""
+   ]
+  },
+  "status": {
+   "output": false,
+   "scheduleOn": false,
+   "sunOn": true,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  },
+  "conf": [
+   {
+    "id": 1,
+    "path": "/status/o3",
+    "target": "/status/output",
+    "pollTime": 0,
+    "mode": ""
+   }
+  ],
+  "setup": {
+   "sun": {
+    "on": true,
+    "onDeg": -6,
+    "offDeg": -6
+   }
+  }
+ },
+ {
+  "id": 1005,
+  "name": "Hall switch",
+  "type": "switch",
+  "enabled": true,
+  "roomId": 71,
+  "siteId": 7,
+  "uuid": "dev01005",
+  "usage": {
+   "switch": [
+    ""
+   ]
+  },
+  "status": {
+   "input": false,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  },
+  "conf": [
+   {
+    "id": 1,
+    "path": "/status/i1",
+    "target": "/status/output",
+    "pollTime": 0,
+    "mode": "",
+    "inverted": false
+   }
+  ]
+ },
+ {
+  "id": 1006,
+  "name": "Hall motion",
+  "type": "securityDetector24",
+  "enabled": true,
+  "roomId": 71,
+  "siteId": 7,
+  "uuid": "dev01006",
+  "usage": {
+   "securityDetector24": [
+    "motion"
+   ],
+   "alarm24": [
+    ""
+   ]
+  },
+  "status": {
+   "active": false,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ },
+ {
+  "id": 1007,
+  "name": "Garage motion",
+  "type": "securityDetector",
+  "enabled": true,
+  "roomId": 72,
+  "siteId": 7,
+  "uuid": "dev01007",
+  "usage": {
+   "securityDetector": [
+    "motion"
+   ],
+   "alarm": [
+    ""
+   ]
+  },
+  "status": {
+   "active": false,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ },
+ {
+  "id": 1008,
+  "name": "Front door contact",
+  "type": "input",
+  "enabled": true,
+  "roomId": 72,
+  "siteId": 7,
+  "uuid": "dev01008",
+  "usage": {
+   "input": [
+    ""
+   ],
+   "alarm24": [
+    ""
+   ]
+  },
+  "status": {
+   "active": false,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ },
+ {
+  "id": 1009,
+  "name": "Kitchen climate",
+  "type": "climateSensor",
+  "enabled": true,
+  "roomId": 70,
+  "siteId": 7,
+  "uuid": "dev01009",
+  "usage": {
+   "climateSensor": [
+    ""
+   ]
+  },
+  "status": {
+   "temperature": 21.5,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ },
+ {
+  "id": 1010,
+  "name": "Garage door",
+  "type": "access",
+  "enabled": true,
+  "roomId": 72,
+  "siteId": 7,
+  "uuid": "dev01010",
+  "usage": {
+   "access": [
+    ""
+   ]
+  },
+  "status": {
+   "locked": true,
+   "open": false,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  },
+  "setup": {
+   "unlockTime": 5
+  }
+ },
+ {
+  "id": 1011,
+  "name": "Bedroom blind",
+  "type": "blind",
+  "enabled": true,
+  "roomId": 73,
+  "siteId": 7,
+  "uuid": "dev01011",
+  "usage": {},
+  "status": {
+   "dim": 0,
+   "direction": false,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ },
+ {
+  "id": 1012,
+  "name": "Bathroom heater",
+  "type": "heater",
+  "enabled": true,
+  "roomId": 73,
+  "siteId": 7,
+  "uuid": "dev01012",
+  "usage": {
+   "output": [
+    ""
+   ]
+  },
+  "status": {},
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  },
+  "setup": {}
+ },
+ {
+  "id": 1013,
+  "name": "IO module",
+  "type": "ioModule",
+  "enabled": true,
+  "roomId": 72,
+  "siteId": 7,
+  "uuid": "dev01013",
+  "usage": {
+   "controller": [
+    ""
+   ]
+  },
+  "status": {
+   "online": true,
+   "voltage": 24.1
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ },
+ {
+  "id": 1014,
+  "name": "Power supply",
+  "type": "powerSupply",
+  "enabled": true,
+  "roomId": 72,
+  "siteId": 7,
+  "uuid": "dev01014",
+  "usage": {
+   "alarm24": [
+    ""
+   ],
+   "securityDetector24": [
+    ""
+   ]
+  },
+  "status": {
+   "battFail": false,
+   "acFail": false,
+   "online": true
+  },
+  "created": 1767225600000,
+  "updated": 1767225600000,
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ }
+]

@@ -1,0 +1,122 @@
+[
+ {
+  "id": 70,
+  "name": "Kitchen",
+  "siteId": 7,
+  "enabled": true,
+  "uuid": "room0070",
+  "category": "",
+  "status": {},
+  "setup": {},
+  "usage": {},
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ },
+ {
+  "id": 71,
+  "name": "Hall",
+  "siteId": 7,
+  "enabled": true,
+  "uuid": "room0071",
+  "category": "",
+  "status": {},
+  "setup": {},
+  "usage": {},
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ },
+ {
+  "id": 72,
+  "name": "Garage",
+  "siteId": 7,
+  "enabled": true,
+  "uuid": "room0072",
+  "category": "",
+  "status": {},
+  "setup": {},
+  "usage": {},
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ },
+ {
+  "id": 73,
+  "name": "Bedroom",
+  "siteId": 7,
+  "enabled": true,
+  "uuid": "room0073",
+  "category": "",
+  "status": {},
+  "setup": {},
+  "usage": {},
+  "acl": {
+   "inherit": [
+    7
+   ],
+   "policy": [
+    {
+     "who": [
+      50
+     ],
+     "acl": 15
+    }
+   ]
+  },
+  "_acl": {
+   "read": true,
+   "write": true,
+   "admin": true,
+   "logs": true
+  }
+ }
+]
